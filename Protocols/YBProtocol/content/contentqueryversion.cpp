@@ -27,7 +27,6 @@ ContentQueryVersion::ContentQueryVersion(const std::vector<uint8_t> &datas)
         desc = u8"通用款";
     }
     iter++;// 6:0x02
-    uint8_t flagLen = *iter++;
     while (iter != datas.end()) {
         m_productDesc += static_cast<char>(*iter++);
     }

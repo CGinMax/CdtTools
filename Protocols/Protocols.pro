@@ -34,6 +34,7 @@ HEADERS += \
     convert.h
 
 include(YBProtocol/YBProtocol.pri)
+include(IEC104/IEC104.pri)
 CONFIG(debug, debug|release){
     DESTDIR = $$PWD/../bin/debug
 }
