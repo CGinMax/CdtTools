@@ -63,21 +63,25 @@ void SwitchButtonThumb::paintEvent(QPaintEvent *event)
     brush.setColor(Qt::white);
     brush.setStyle(Qt::SolidPattern);
 
-    QPen pen(QBrush(QColor(Qt::gray)), /*m_switchBtn->penWidth()*/1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(QBrush(QColor(Qt::white)), m_switchBtn->penWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setPen(pen);
-    painter.setBrush(brush);
+//    painter.setBrush(brush);
 
     QRectF r;
+    QRect thumbRect;
     if (m_switchBtn->orientation() == Qt::Horizontal) {
-        auto thumbRect = m_switchBtn->thumbRect();
-        r = QRectF(m_offset, 0, thumbRect.height(), thumbRect.height());
+        thumbRect = m_switchBtn->thumbRect();
+        int w = thumbRect.height() - (m_shift * (thumbRect.height() - pen.width() * 2)) - pen.width() * 2;
+        int h = thumbRect.height() - pen.width() * 2;
+        r = QRectF(m_offset, pen.width(), w, h);
 //        r = QRectF(m_offset, m_switchBtn->thumbMargins().top(), m_thumbWidth, qMax(static_cast<int>(m_thumbWidth), height() - m_switchBtn->thumbMargins().top() - m_switchBtn->thumbMargins().bottom()));
 
     } else {
 //        r = QRectF(5, 5 + m_offset, width(), m_thumbWidth);
     }
 
-    painter.drawEllipse(r);
+//    painter.drawEllipse(r);
+    painter.drawRoundedRect(r, thumbRect.width(), thumbRect.height());
 
     if (!m_switchBtn->isEnabled()) {
         pen.setColor(m_switchBtn->disabledColor());
@@ -94,7 +98,7 @@ void SwitchButtonThumb::updateOffset()
                   ? size() : size().transposed());
     auto thumbRect = m_switchBtn->thumbRect();
 
-    m_offset = 0 + m_shift * static_cast<qreal>(m_switchBtn->trackRect().width() - m_switchBtn->trackRect().height() /*- m_switchBtn->penWidth()*/);
+    m_offset = m_switchBtn->penWidth() * (1 - m_shift) + m_shift * static_cast<qreal>(m_switchBtn->trackRect().width() - m_switchBtn->trackRect().height() / 2);
 //    qDebug() << "offset:" << m_offset;
 //    int circleWidth = m_switchBtn->trackRect().height() / 2;
 //    m_switchBtn->setOffStateWidth(circleWidth);

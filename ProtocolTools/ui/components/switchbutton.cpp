@@ -251,14 +251,14 @@ QMargins SwitchButton::trackMargins() const
     return d->trackMargins;
 }
 
-void SwitchButton::setPenWidth(qreal penWidth)
+void SwitchButton::setPenWidth(int penWidth)
 {
     Q_D(SwitchButton);
     d->penWidth = penWidth;
     update();
 }
 
-qreal SwitchButton::penWidth() const
+int SwitchButton::penWidth() const
 {
     Q_D(const SwitchButton);
     return d->penWidth;

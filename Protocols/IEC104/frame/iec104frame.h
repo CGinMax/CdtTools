@@ -21,7 +21,7 @@ public:
     std::string toString();
 
     uint8_t m_num;
-    uint8_t m_sq;
+    bool m_sq;
 };
 
 struct IEC104Cause
@@ -106,6 +106,13 @@ public:
 };
 
 class IEC104TwiceYXQuality : public IEC104Quality
+{
+public:
+    using IEC104Quality::IEC104Quality;
+    std::string toString() override;
+};
+
+class IEC104YCQuality : public IEC104Quality
 {
 public:
     using IEC104Quality::IEC104Quality;

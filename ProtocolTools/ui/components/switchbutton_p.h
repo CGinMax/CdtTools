@@ -36,7 +36,7 @@ public:
     QColor                     activeColor;
     QColor                     inactiveColor;
     QColor                     trackColor;
-    qreal                      penWidth;
+    int                        penWidth;
 };
 
 #endif // SWITCHBUTTON_P_H

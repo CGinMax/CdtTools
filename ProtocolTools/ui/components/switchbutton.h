@@ -39,8 +39,8 @@ public:
     void setTrackMargins(const QMargins& margins);
     QMargins trackMargins() const;
 
-    void setPenWidth(qreal penWidth);
-    qreal penWidth() const;
+    void setPenWidth(int penWidth);
+    int penWidth() const;
 
     QRect thumbRect();
 
