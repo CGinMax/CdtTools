@@ -61,7 +61,7 @@ QSize Ui::RaiseButton::sizeHint() const
 {
     ensurePolished();
     QSize textSize(fontMetrics().size(Qt::TextSingleLine, text()));
-    int w = 16 + textSize.width();
+    int w = 16 + textSize.width() + 16;
     int h = textSize.height();
 
     if (!icon().isNull()) {
@@ -69,7 +69,7 @@ QSize Ui::RaiseButton::sizeHint() const
         h = qMax(h, iconSize().height());
     }
 
-    return {w, h + 16};
+    return {w, h + 8};
 
 }
 

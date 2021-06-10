@@ -12,9 +12,7 @@ ExpandWidgetItemPrivate::ExpandWidgetItemPrivate(ExpandWidgetItem* q)
     : q_ptr(q)
     , m_borderColor(QColor(Qt::blue))
     , m_backgroundColor(QColor(0xFAFBFB))
-    , m_isExpanded(false)
     , m_borderRadius(0)
-    , m_animationDuration(150)
 {
 
 }
@@ -34,7 +32,6 @@ ExpandWidgetItem::ExpandWidgetItem(ExpandTile *tile, GatherController *controlle
     , m_isSelected(false)
     , m_tile(tile)
     , m_contentArea(new QWidget(this))
-    , m_transitionAimation(new QParallelAnimationGroup(this))
     , m_shadowEffect(new Ui::ShadowEffect(this))
     , m_controller(controller)
 {
@@ -43,12 +40,8 @@ ExpandWidgetItem::ExpandWidgetItem(ExpandTile *tile, GatherController *controlle
     setGraphicsEffect(m_shadowEffect);
     m_shadowEffect->setEnabled(false);
     setMaximumWidth(280);
-//    m_contentArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-//    m_contentArea->setMaximumHeight(0);
-//    m_contentArea->setMinimumHeight(0);
 
     auto mainLayout = new QGridLayout(this);
-//    auto mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(0);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(m_tile, 0, 0);
@@ -57,15 +50,7 @@ ExpandWidgetItem::ExpandWidgetItem(ExpandTile *tile, GatherController *controlle
     auto contentLayout = new QVBoxLayout(m_contentArea);
     contentLayout->setSpacing(0);
 
-    m_transitionAimation->addAnimation(new QPropertyAnimation(this, QByteArray("minimumHeight")));
-    m_transitionAimation->addAnimation(new QPropertyAnimation(this, QByteArray("maximumHeight")));
-    m_transitionAimation->addAnimation(new QPropertyAnimation(m_contentArea, QByteArray("maximumHeight")));
-
     connect(tile, &ExpandTile::deleteItem, this, &ExpandWidgetItem::deleteItem);
-
-//    connect(m_tile, &ExpandTile::toggled, this, [this](bool checked){
-//        this->expand(checked);
-//    });
 
 }
 
@@ -84,25 +69,6 @@ void ExpandWidgetItem::setContentWidget(QWidget *widget)
     }
     m_contentArea->layout()->addWidget(widget);
 
-    updateContentAnimation();
-}
-
-void ExpandWidgetItem::updateContentAnimation()
-{
-    Q_D(ExpandWidgetItem);
-    // 更新expand动画的高度
-    const auto collapsedHeight = sizeHint().height() - m_contentArea->maximumHeight();
-    auto contentHeight = m_contentArea->sizeHint().height();
-    for (int i = 0; i < m_transitionAimation->animationCount() - 1; ++i) {
-        auto spoilerAnimation = static_cast<QPropertyAnimation *>(m_transitionAimation->animationAt(i));
-        spoilerAnimation->setDuration(d->m_animationDuration);
-        spoilerAnimation->setStartValue(collapsedHeight);
-        spoilerAnimation->setEndValue(collapsedHeight + contentHeight);
-    }
-    auto contentAnimation = static_cast<QPropertyAnimation *>(m_transitionAimation->animationAt(m_transitionAimation->animationCount() - 1));
-    contentAnimation->setDuration(d->m_animationDuration);
-    contentAnimation->setStartValue(0);
-    contentAnimation->setEndValue(contentHeight);
 }
 
 GatherController *ExpandWidgetItem::getController()
@@ -152,31 +118,6 @@ void ExpandWidgetItem::setBorderRadius(int radius)
     Q_D(ExpandWidgetItem);
     d->m_borderRadius = radius;
     update();
-}
-
-bool ExpandWidgetItem::expanded() const
-{
-    Q_D(const ExpandWidgetItem);
-    return d->m_isExpanded;
-}
-
-void ExpandWidgetItem::setExpanded(bool expanded)
-{
-    Q_D(ExpandWidgetItem);
-    d->m_isExpanded = expanded;
-    expand(expanded);
-    emit expandedChanged(expanded);
-//    update();
-}
-
-void ExpandWidgetItem::expand(bool needExpanded)
-{
-    QAbstractAnimation::Direction direction = QAbstractAnimation::Backward;
-    if (needExpanded) {
-        direction = QAbstractAnimation::Forward;
-    }
-    m_transitionAimation->setDirection(direction);
-    m_transitionAimation->start();
 }
 
 bool ExpandWidgetItem::isSelected() const

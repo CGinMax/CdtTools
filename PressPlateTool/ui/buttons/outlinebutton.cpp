@@ -1,5 +1,6 @@
 #include "outlinebutton.h"
 #include "outlinebutton_p.h"
+#include "../base/theme.h"
 
 Ui::OutlineButtonPrivate::OutlineButtonPrivate(Ui::OutlineButton* q)
     : RaiseButtonPrivate(q)
@@ -14,6 +15,7 @@ void Ui::OutlineButtonPrivate::init()
 {
     m_shadowEffect->setEnabled(false);
     m_backgroundColor = QColor(Qt::transparent);
+    m_foregroundColor = Theme::instance()->primaryColor();
     m_borderColor = m_foregroundColor;
     m_enabledBorder = true;
 

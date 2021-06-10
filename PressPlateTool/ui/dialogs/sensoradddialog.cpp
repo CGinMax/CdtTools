@@ -10,11 +10,16 @@ SensorAddDialog::SensorAddDialog(QWidget *parent) :
     ui->setupUi(this);
 
     auto okBtn = new Ui::RaiseButton(tr("OK"), this);
+    okBtn->setForegroundColor(Qt::white);
+    okBtn->setEnabledShadow(false);
 
-    auto cancelBtn = new Ui::OutlineButton(tr("Cancel"), this);
+    auto cancelBtn = new Ui::RaiseButton(tr("Cancel"), this);
+    cancelBtn->setForegroundColor(cancelBtn->backgroundColor());
+    cancelBtn->setEnabledShadow(false);
+    cancelBtn->setBackgroundColor(Qt::transparent);
 
-    ui->btnLayout->addWidget(cancelBtn);
     ui->btnLayout->addWidget(okBtn);
+    ui->btnLayout->addWidget(cancelBtn);
 
     connect(okBtn, &QAbstractButton::clicked, this, &SensorAddDialog::accept);
     connect(cancelBtn, &QAbstractButton::clicked, this, &SensorAddDialog::reject);

@@ -19,9 +19,7 @@ public:
     ExpandWidgetItem*   const q_ptr;
     QColor              m_borderColor;
     QColor              m_backgroundColor;
-    bool                m_isExpanded;
     int                 m_borderRadius;
-    int                 m_animationDuration;
 };
 
 #endif // EXPANDWIDGETITEM_P_H
