@@ -21,7 +21,6 @@ ChannelTreeWidget::ChannelTreeWidget(QWidget *parent)
     m_networkIcons.append(QIcon(":/icon/resources/udp.png"));
     m_networkIcons.append(QIcon(":/icon/resources/serialport.png"));
 
-    setStyle(QStyleFactory::create(QLatin1String("Windows")));
     initMenuAction();
     m_tcpClientParent->setText(0, tr("Tcp Client"));
     m_tcpServerParent->setText(0, tr("Tcp Server"));
