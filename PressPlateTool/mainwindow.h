@@ -20,8 +20,6 @@ public:
 
     static int createNo;
 
-    static void showSnackBar(const QString& text, const QIcon& icon = QIcon());
-
 public slots:
     void onNotifyAddOne();
 

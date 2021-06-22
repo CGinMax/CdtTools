@@ -182,7 +182,7 @@ bool GatherController::canDoOperate()
 {
     bool active = isCommunicationActive();
     if (!active) {
-        MainWindow::showSnackBar(tr("Can not operate!"));
+        Ui::SnackBar::showSnackBar(m_operWidget, tr("Can not operate!"));
     }
     return active;
 }

@@ -17,7 +17,6 @@
 #include "ui/buttons/iconbutton.h"
 #include "ui/base/faicon.h"
 
-#include "ui/notification/snackbar.h"
 int MainWindow::createNo = 1;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -63,24 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::showSnackBar(const QString &text, const QIcon &icon)
-{
-    for (auto& topWidget : QApplication::topLevelWidgets()) {
-        if (auto mainwidget = qobject_cast<MainWindow*>(topWidget)) {
-
-            auto bar = new Ui::SnackBar(icon, text, mainwidget);
-            bar->setAction("OK", []{});
-            connect(bar, &Ui::SnackBar::showFinished, mainwidget, [=]{
-                delete bar;
-            });
-            bar->showBar();
-            return ;
-        }
-    }
-    qDebug("No parent");
-
 }
 
 void MainWindow::onNotifyAddOne()

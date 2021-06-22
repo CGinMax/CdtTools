@@ -1,0 +1,116 @@
+set(SUBDIR_NAME ui)
+
+find_package(Qt5 COMPONENTS
+    Core
+    Gui
+    Widgets
+    Network
+    SerialPort
+REQUIRED
+)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+include_directories(page)
+set(HEADERS
+expand/expandwidgetitem.h
+expand/expandwidgetitem_p.h
+expand/expandtile.h
+expand/expandwidget.h
+expand/tileicon.h
+expand/gatheroperwidget.h
+tables/ybtablemodel.h
+tables/listdelegate.h
+tables/listviewitem.h
+gatherdetailpage.h
+tables/ybtableview.h
+tables/listheader.h
+buttons/fabcircularmenu.h
+editableeventfilter.h
+expand/gathercontroller.h
+dialogs/serialportdialog.h
+buttons/rippleanimation.h
+page/tablepage.h
+buttons/fabbutton.h
+notificationbtn.h
+buttons/iconbutton.h
+buttons/abstractbutton.h
+buttons/abstractbutton_p.h
+buttons/rippleeffect.h
+base/style.h
+base/theme.h
+effect/shadoweffect.h
+buttons/raisebutton.h
+buttons/raisebutton_p.h
+base/painterhighqualityenabler.h
+buttons/flatbutton.h
+buttons/flatbutton_p.h
+buttons/outlinebutton.h
+buttons/outlinebutton_p.h
+buttons/iconbutton_p.h
+buttons/fabbutton_p.h
+base/faicon.h
+notification/snackbar.h
+notification/snackbar_p.h
+base/base_type.h
+animation/slideanimation.h
+page/gatherpage.h
+dialogs/sensoradddialog.h
+dialogs/sensoroperationdlg.h
+page/serialportpage.h
+page/configurationpage.h
+)
+set(SOURCES
+expand/expandwidgetitem.cpp
+expand/expandtile.cpp
+expand/expandwidget.cpp
+expand/tileicon.cpp
+expand/gatheroperwidget.cpp
+tables/ybtablemodel.cpp
+tables/listdelegate.cpp
+tables/listviewitem.cpp
+gatherdetailpage.cpp
+tables/ybtableview.cpp
+tables/listheader.cpp
+buttons/fabcircularmenu.cpp
+editableeventfilter.cpp
+expand/gathercontroller.cpp
+dialogs/serialportdialog.cpp
+buttons/rippleanimation.cpp
+page/tablepage.cpp
+buttons/fabbutton.cpp
+notificationbtn.cpp
+buttons/iconbutton.cpp
+buttons/abstractbutton.cpp
+buttons/rippleeffect.cpp
+base/style.cpp
+base/theme.cpp
+effect/shadoweffect.cpp
+buttons/raisebutton.cpp
+base/painterhighqualityenabler.cpp
+buttons/flatbutton.cpp
+buttons/outlinebutton.cpp
+base/faicon.cpp
+notification/snackbar.cpp
+animation/slideanimation.cpp
+page/gatherpage.cpp
+dialogs/sensoradddialog.cpp
+dialogs/sensoroperationdlg.cpp
+page/serialportpage.cpp
+page/configurationpage.cpp
+)
+
+qt5_wrap_ui(FORMS **.ui)
+
+add_library(${SUBDIR_NAME}
+STATIC
+    ${HEADERS}
+    ${SOURCES}
+    ${FORMS}
+)
+
+target_link_libraries(${SUBDIR_NAME} PUBLIC
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+    Qt5::Network
+    Qt5::SerialPort
+)
