@@ -252,27 +252,38 @@ void TablePage::onSetSensorAddr(int index, int addr)
     }
 
     auto reply = m_controller->protocol()->setAddress(eYBFrameType::YBSensor, static_cast<uint8_t>(addr), m_controller->gatherData()->sensorTimeout());
+    auto dlg = new SensorOperationDlg(tr("Set sensor address dialog"), tr("Set sensor address = %1").arg(addr), this);
     reply->subscribe([=](std::shared_ptr<IContent> result){
         if (result == nullptr) {
             Ui::SnackBar::showSnackBar(this, tr("Info:Configure sensor address receive unkonw frame response!"));
             qDebug("Unknow frame data");
+            dlg->accept();
+            delete dlg;
             return ;
         }
         if (result->functionCode() == eYBFunCode::NAKCode) {
             qDebug("NAK Error");
+            dlg->accept();
+            delete dlg;
             return ;
         }
         if (result->success()) {
             this->m_table->setListItemAddr(index, addr);
             this->onQuerySensorStatus(index, addr);
+            Ui::SnackBar::showSnackBar(this, tr("Configure sensor address success!"));
         } else {
             Ui::SnackBar::showSnackBar(this, tr("Configure sensor address failed!"));
             qDebug("set sensor address failed!");
         }
+        dlg->accept();
+        delete dlg;
     }, [=](){
         Ui::SnackBar::showSnackBar(this, tr("Configure sensor address timeout!"));
         qDebug("set sensor address timeout!");
+        dlg->reject();
+        delete dlg;
     });
+    dlg->exec();
 }
 
 void TablePage::onQuerySensorStatus(int index, int addr)

@@ -4,7 +4,7 @@
 #include "gatheroperwidget.h"
 #include "serialport.h"
 #include "../notification/snackbar.h"
-#include "../../mainwindow.h"
+#include "../dialogs/sensoroperationdlg.h"
 
 #include <QApplication>
 
@@ -127,26 +127,36 @@ void GatherController::onSetGatherAddress(int addr)
     }
 
     auto reply = protocol()->setAddress(eYBFrameType::YBGather, static_cast<uint8_t>(addr), m_gatherData->gatherTimeout());
+    auto dlg = new SensorOperationDlg(tr("Set gather address dialog"), tr("Set gather address = %1").arg(addr), m_operWidget);
     reply->subscribe([=](std::shared_ptr<IContent> result){
         if (result == nullptr) {
             qDebug("Unknow frame data");
+            dlg->accept();
+            delete dlg;
             return ;
         }
         if (result->functionCode() == eYBFunCode::NAKCode) {
             qDebug("NAK Error");
+            dlg->accept();
+            delete dlg;
             return ;
         }
         if (result->success()) {
             this->setAddress(addr);
+            Ui::SnackBar::showSnackBar(m_operWidget, tr("Set gather address success!"));
         } else {
             //TODO(shijm): 失败处理
             qDebug("address failed");
         }
+        dlg->accept();
+        delete dlg;
     },
-    []() {
+    [=]() {
         qDebug("gather set address timeout cancel");
+        dlg->accept();
+        delete dlg;
     });
-
+    dlg->exec();
 }
 
 void GatherController::onResetSensorCount(int count)
