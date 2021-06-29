@@ -27,9 +27,19 @@ int ConfigurationPage::gatherTime() const
     return ui->editGatherTime->value();
 }
 
+void ConfigurationPage::setGatherTime(int time)
+{
+    ui->editGatherTime->setValue(time);
+}
+
 int ConfigurationPage::sensorTime() const
 {
     return ui->editSensorTime->value();
+}
+
+void ConfigurationPage::setSensorTime(int time)
+{
+    ui->editSensorTime->setValue(time);
 }
 
 void ConfigurationPage::setPortParam(const PortParam &param)

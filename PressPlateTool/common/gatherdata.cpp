@@ -8,8 +8,8 @@ GatherData::GatherData(const QString &name, QObject *parent)
     , m_softwareVer(QString())
     , m_productDesc(QString())
     , m_sensorCount(0)
-    , m_gatherTimeout(5000)
-    , m_sensorTimeout(5000)
+    , m_gatherTimeout(12000)
+    , m_sensorTimeout(12000)
 {
 
 }

@@ -11,8 +11,6 @@ HEADERS += \
     $$PWD/expand/expandwidget.h \
     $$PWD/expand/tileicon.h \
     $$PWD/expand/gatheroperwidget.h \
-    $$PWD/tables/ybtablemodel.h \
-    $$PWD/tables/listdelegate.h \
     $$PWD/tables/listviewitem.h \
     $$PWD/gatherdetailpage.h \
     $$PWD/tables/ybtableview.h \
@@ -58,8 +56,6 @@ SOURCES += \
     $$PWD/expand/expandwidget.cpp \
     $$PWD/expand/tileicon.cpp \
     $$PWD/expand/gatheroperwidget.cpp \
-    $$PWD/tables/ybtablemodel.cpp \
-    $$PWD/tables/listdelegate.cpp \
     $$PWD/tables/listviewitem.cpp \
     $$PWD/gatherdetailpage.cpp \
     $$PWD/tables/ybtableview.cpp \

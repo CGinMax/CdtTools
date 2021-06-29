@@ -33,17 +33,21 @@ GatherDetailPage::~GatherDetailPage()
 
 void GatherDetailPage::onItemChanged(GatherController *controller)
 {
+    // disconnect invalid signal
     if (!m_gatherData.isNull()) {
         disconnect(m_gatherData.data(), &GatherData::nameChanged, this, &GatherDetailPage::onNameChanged);
         disconnect(m_gatherData.data(), &GatherData::addrChanged, this, &GatherDetailPage::onAddrChanged);
-
     }
+
     m_tablePage->setGatherController(controller);
     if (controller != nullptr) {
+        // init configure page data if controller is valid
         m_gatherData = controller->gatherData();
         ui->txtName->setText(m_gatherData->name());
         ui->txtAddress->setText(QString::number(m_gatherData->addr()));
         m_confPage->setPortParam(m_gatherData->portParam());
+        m_confPage->setGatherTime(m_gatherData->gatherTimeout());
+        m_confPage->setSensorTime(m_gatherData->sensorTimeout());
 
         connect(m_gatherData.data(), &GatherData::nameChanged, this, &GatherDetailPage::onNameChanged);
         connect(m_gatherData.data(), &GatherData::addrChanged, this, &GatherDetailPage::onAddrChanged);

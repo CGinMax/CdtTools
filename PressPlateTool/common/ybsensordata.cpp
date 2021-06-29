@@ -14,6 +14,7 @@ YBSensorData::YBSensorData(QObject *parent)
 }
 
 YBSensorData::YBSensorData(const YBSensorData &other)
+    : QObject(other.parent())
 {
     *this = other;
 }

@@ -29,7 +29,7 @@ TablePage::TablePage(QWidget *parent)
     ui->editEnd->setRange(0x01, 0x7E);
 
     ui->textMsg->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->textMsg, &QWidget::customContextMenuRequested, this, [=](const QPoint& pos){
+    connect(ui->textMsg, &QWidget::customContextMenuRequested, this, [=](const QPoint& /*pos*/){
         QMenu menu;
         menu.addAction(tr("Clear"), this, [=]{ ui->textMsg->clear(); });
         menu.exec(QCursor::pos());

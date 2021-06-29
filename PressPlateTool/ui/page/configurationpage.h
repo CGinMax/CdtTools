@@ -17,8 +17,10 @@ public:
     ~ConfigurationPage() override;
 
     int gatherTime() const;
+    void setGatherTime(int time);
 
     int sensorTime() const;
+    void setSensorTime(int time);
 
     void setPortParam(const PortParam& param);
     PortParam portParam() const;

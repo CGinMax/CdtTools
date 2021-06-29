@@ -29,6 +29,7 @@ bool NotificationBtn::event(QEvent *event)
     } else if (event->type() == QEvent::HoverLeave) {
         emit hideNotification();
     }
+    return QPushButton::event(event);
 }
 
 void NotificationBtn::paintEvent(QPaintEvent *event)

@@ -312,7 +312,7 @@ QSize Ui::SnackBar::sizeHint() const
 
 void Ui::SnackBar::setEnabledAnimation(bool enabled)
 {
-//    Q_D(     )
+    Q_UNUSED(enabled)
 }
 
 void Ui::SnackBar::showBar(const QPoint& startValue, const QPoint& endValue)
@@ -462,9 +462,9 @@ void Ui::SnackBar::prepareSlidePos()
     QWidget* widget = parentWidget();
     int topWidth = 1000;
     int topHeight = 1000;
-    if (parentWidget() != nullptr) {
-        topWidth = parentWidget()->width();
-        topHeight = parentWidget()->height();
+    if (widget != nullptr) {
+        topWidth = widget->width();
+        topHeight = widget->height();
     } else {
         qDebug("please set parent!");
         return ;
