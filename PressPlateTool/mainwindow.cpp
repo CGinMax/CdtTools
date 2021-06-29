@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     ui->mainToolBar->addAction(FAIcon::instance()->icon(QString("save")), tr("Save"), this, &MainWindow::onSave);
-    ui->mainToolBar->addAction(FAIcon::instance()->icon("folderopen"), tr("Open"), this, &MainWindow::onLoad);
+    ui->mainToolBar->addAction(FAIcon::instance()->icon(QString("folder-open")), tr("Open"), this, &MainWindow::onLoad);
 
     connect(ui->gatherPage, &GatherPage::itemChanged, ui->gatherDetailPage, &GatherDetailPage::onItemChanged);
 

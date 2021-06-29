@@ -11,7 +11,7 @@ GatherPage::GatherPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    auto delBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("trasho")), this);
+    auto delBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("trash-alt")), this);
     delBtn->setBackgroundEnabled(false);
     delBtn->setIconColor(Qt::red);
     delBtn->setIconSize(QSize(20, 20));

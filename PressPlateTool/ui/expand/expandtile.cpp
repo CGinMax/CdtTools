@@ -21,14 +21,14 @@ ExpandTile::ExpandTile(const QString &title, QWidget *parent)
     font.setPixelSize(20);
     ui->editTitle->setFont(font);
     ui->editTitle->setText(title);
-    auto delBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("trasho")), this);
+    auto delBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("trash-alt")), this);
     delBtn->setIconSize(QSize(20, 20));
     delBtn->setBackgroundEnabled(false);
     delBtn->setMaximumSize(20, 20);
     delBtn->setXRadius(delBtn->width())->setYRadius(delBtn->height());
     ui->mainLayout->addWidget(delBtn, 0, 1);
 
-    auto queryVerBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("refresh")), this);
+    auto queryVerBtn = new Ui::IconButton(FAIcon::instance()->icon(QString("redo")), this);
     queryVerBtn->setIconSize(QSize(20, 20));
     queryVerBtn->setBackgroundEnabled(false);
     queryVerBtn->setMaximumSize(20, 20);
