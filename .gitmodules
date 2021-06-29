@@ -1,6 +1,6 @@
 [submodule "QtAwesome"]
 	path = QtAwesome
-	url = https://github.com/gamecreature/QtAwesome.git
+	url = https://github.com/CGinMax/QtAwesome.git
 [submodule "asyncfuture"]
 	path = asyncfuture
 	url = https://github.com/benlau/asyncfuture.git
