@@ -1,6 +1,6 @@
 #include "fabbutton.h"
 #include "fabbutton_p.h"
-
+#include <QPainterPath>
 #include <QSizePolicy>
 #include <QEvent>
 

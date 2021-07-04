@@ -65,7 +65,6 @@ void SwitchButtonThumb::paintEvent(QPaintEvent *event)
 
     QPen pen(QBrush(QColor(Qt::white)), m_switchBtn->penWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setPen(pen);
-//    painter.setBrush(brush);
 
     QRectF r;
     QRect thumbRect;
@@ -99,9 +98,6 @@ void SwitchButtonThumb::updateOffset()
     auto thumbRect = m_switchBtn->thumbRect();
 
     m_offset = m_switchBtn->penWidth() * (1 - m_shift) + m_shift * static_cast<qreal>(m_switchBtn->trackRect().width() - m_switchBtn->trackRect().height() / 2);
-//    qDebug() << "offset:" << m_offset;
-//    int circleWidth = m_switchBtn->trackRect().height() / 2;
-//    m_switchBtn->setOffStateWidth(circleWidth);
     update();
 }
 

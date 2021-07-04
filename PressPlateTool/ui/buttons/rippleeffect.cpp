@@ -21,7 +21,6 @@ Ui::RippleEffect::~RippleEffect()
     for (auto& ripple : m_ripples) {
         ripple->stop();
         delete ripple;
-        //ripple->destory();
     }
     m_ripples.clear();
 }
@@ -31,10 +30,6 @@ void Ui::RippleEffect::addRipple(RippleAnimation *ripple)
     ripple->setOverlay(this);
     ripple->start();
     m_ripples.append(ripple);
-
-    // 避免控件delete时动画还在运行，无法释放问题
-//    connect(this, &RippleEffect::destroyed, ripple, &RippleAnimation::stop);
-//    connect(this, &RippleEffect::destroyed, ripple, &RippleAnimation::destory);
 }
 
 void Ui::RippleEffect::addRipple(const QPoint &center, qreal radius)
@@ -127,13 +122,14 @@ bool Ui::RippleEffect::eventFilter(QObject *watched, QEvent *event)
         setGeometry(overlayGeometry());
         break;
     case QEvent::MouseButtonPress: {
+        if (m_rippleStyle == RippleStyle::NoRipple) {
+            break;
+        }
         auto mouseEvent = static_cast<QMouseEvent*>(event);
         QPoint pos = mouseEvent->pos();
         qreal radius = this->width() > this->height() ? this->width() / 2 : this->height() / 2;
 
-        if (m_rippleStyle == RippleStyle::NoRipple) {
-            break;
-        }
+
         if (m_rippleStyle == RippleStyle::CenteredRipple) {
             pos = this->rect().center();
         }
